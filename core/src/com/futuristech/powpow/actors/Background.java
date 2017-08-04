@@ -3,9 +3,12 @@ package com.futuristech.powpow.actors;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.futuristech.powpow.utils.Assets;
 import com.futuristech.powpow.utils.Constants;
 
 public class Background extends Actor {
@@ -14,6 +17,11 @@ public class Background extends Actor {
     private Rectangle textureRegionBounds1;
     private Rectangle textureRegionBounds2;
     private int speed = 100;
+    
+    private int score = 100;
+    private BitmapFont scoreFont = new BitmapFont();
+    private BitmapFont gameOverFont = new BitmapFont();
+    GlyphLayout glyphLayout = new GlyphLayout();
 
     public Background()
     {
@@ -38,6 +46,23 @@ public class Background extends Actor {
                 Constants.APP_HEIGHT);
         batch.draw(textureRegion, textureRegionBounds2.x, textureRegionBounds2.y, Constants.APP_WIDTH,
                 Constants.APP_HEIGHT);
+        if (Assets.runnerHit)
+        {
+//            gameOverFont.draw(batch, "Game Over: " + (score / 100), 0, 0);
+            String text = "Game Over: " + (score / 100);
+            glyphLayout.setText(gameOverFont, text);
+            float y = glyphLayout.height;
+            float x = glyphLayout.width;
+            gameOverFont.getData().setScale(3f);
+            gameOverFont.draw(batch, "Game Over\n Final Score: " + (score / 100), x, 480 - 20);
+            
+        }
+        else
+        {
+            score += 10;
+            scoreFont.getData().setScale(2f);
+            scoreFont.draw(batch, "Score: " + (score / 100), 16, 480 - 20);
+        }
     }
 
     private boolean leftBoundsReached(float delta) {
