@@ -173,8 +173,7 @@ public class GameStage extends Stage implements ContactListener {
 
         if (rightSideTouched(touchPoint.x, touchPoint.y)) {
             runner.jump();
-            Sound jump = Gdx.audio.newSound(Gdx.files.internal("music/jump.wav"));
-            jump.play();
+            Assets.jump.play();
         } else if (leftSideTouched(touchPoint.x, touchPoint.y)) {
             runner.dodge();
         }

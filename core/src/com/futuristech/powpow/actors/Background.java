@@ -26,7 +26,7 @@ public class Background extends Actor {
     private BitmapFont gameOverFont = new BitmapFont();
     GlyphLayout glyphLayout = new GlyphLayout();
 
-    private Music musicBackground;
+
 
 
     public Background()
@@ -35,9 +35,9 @@ public class Background extends Actor {
         textureRegionBounds1 = new Rectangle(0 - Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
         textureRegionBounds2 = new Rectangle(Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
 
-        musicBackground = Gdx.audio.newMusic(Gdx.files.internal("music/backmusic.ogg"));
-        musicBackground.setLooping(true);
-        musicBackground.play();
+
+        Assets.musicBackground.setLooping(true);
+        Assets.musicBackground.play();
 
 
     }
@@ -61,7 +61,7 @@ public class Background extends Actor {
         if (Assets.runnerHit)
         {
 
-            musicBackground.stop();
+            Assets.musicBackground.stop();
 //            gameOverFont.draw(batch, "Game Over: " + (score / 100), 0, 0);
             String text = "Game Over: " + (score / 100);
             glyphLayout.setText(gameOverFont, text);
