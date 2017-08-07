@@ -16,9 +16,9 @@ import com.futuristech.powpow.utils.Constants;
 
 public class Background extends Actor {
 
-    private final TextureRegion textureRegion;
-    private Rectangle textureRegionBounds1;
-    private Rectangle textureRegionBounds2;
+    public static TextureRegion textureRegion;
+    public static Rectangle textureRegionBounds1;
+    public static Rectangle textureRegionBounds2;
     private int speed = 100;
     
     private int score = 100;
