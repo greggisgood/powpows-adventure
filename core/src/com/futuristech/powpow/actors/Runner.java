@@ -107,8 +107,7 @@ public class Runner extends GameActor {
     public void hit() {
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
-        Sound gameover = Gdx.audio.newSound(Gdx.files.internal("music/gameover.wav"));
-        gameover.play();
+        Assets.gameover.play();
     }
 
     public boolean isHit() {
