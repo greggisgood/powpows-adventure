@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.futuristech.powpow.screens.GameScreen;
 import com.futuristech.powpow.screens.MainMenuScreen;
 import com.futuristech.powpow.utils.GameCamera;
+import com.futuristech.powpow.utils.ScrollingBackground;
 
 public class MyGame extends Game {
 	
@@ -18,6 +19,7 @@ public class MyGame extends Game {
 	public static final int WIDTH = 480;
 	public static final int HEIGHT = 720;
 	public static boolean IS_MOBILE = false;
+	public ScrollingBackground scrollingBackground;
 	
 	public GameCamera cam;
 	
@@ -30,6 +32,7 @@ public class MyGame extends Game {
 			IS_MOBILE = true;
 		IS_MOBILE = true;
 		
+		this.scrollingBackground = new ScrollingBackground();
 		this.setScreen(new MainMenuScreen(this));
 	}
 	
@@ -44,4 +47,6 @@ public class MyGame extends Game {
 		cam.update(width, height);
 		super.resize(width, height);
 	}
+	
+	
 }

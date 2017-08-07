@@ -1,6 +1,7 @@
 package com.futuristech.powpow.stages;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -19,6 +20,7 @@ import com.futuristech.powpow.actors.Background;
 import com.futuristech.powpow.actors.Enemy;
 import com.futuristech.powpow.actors.Ground;
 import com.futuristech.powpow.actors.Runner;
+import com.futuristech.powpow.utils.Assets;
 import com.futuristech.powpow.utils.BodyUtils;
 import com.futuristech.powpow.utils.Constants;
 import com.futuristech.powpow.utils.WorldUtils;
@@ -76,6 +78,7 @@ public class GameStage extends Stage implements ContactListener {
         if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsEnemy(b)) ||
                 (BodyUtils.bodyIsEnemy(a) && BodyUtils.bodyIsRunner(b))) {
             runner.hit();
+
         } else if ((BodyUtils.bodyIsRunner(a) && BodyUtils.bodyIsGround(b)) ||
                 (BodyUtils.bodyIsGround(a) && BodyUtils.bodyIsRunner(b))) {
             runner.landed();
@@ -170,6 +173,8 @@ public class GameStage extends Stage implements ContactListener {
 
         if (rightSideTouched(touchPoint.x, touchPoint.y)) {
             runner.jump();
+            Sound jump = Gdx.audio.newSound(Gdx.files.internal("music/jump.wav"));
+            jump.play();
         } else if (leftSideTouched(touchPoint.x, touchPoint.y)) {
             runner.dodge();
         }

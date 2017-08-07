@@ -9,7 +9,12 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.futuristech.powpow.MyGame;
+import com.futuristech.powpow.actors.Background;
+import com.futuristech.powpow.utils.ScrollingBackground;
 
 
 public class MainMenuScreen implements Screen {
@@ -24,13 +29,20 @@ public class MainMenuScreen implements Screen {
   private static final int LOGO_HEIGHT = 250;
   private static final int LOGO_Y = 450;
   
+  private Stage stage;
+  
   final MyGame game;
   
   Texture playButtonActive;
   Texture playButtonInactive;
   Texture exitButtonActive;
   Texture exitButtonInactive;
+  Texture background;
   Texture logo;
+  
+  public static Texture backgroundTexture;
+  public static Sprite backgroundSprite;
+  private SpriteBatch spriteBatch;
   
   public MainMenuScreen (final MyGame game) {
     this.game = game;
@@ -38,8 +50,10 @@ public class MainMenuScreen implements Screen {
     playButtonInactive = new Texture("btnstart.png");
     exitButtonActive = new Texture("exitbtnt.jpg");
     exitButtonInactive = new Texture("exitbtnt.jpg");
+    background = new Texture("background.png");
     logo = new Texture("ground.png");
     
+    stage = new Stage();
     
     final MainMenuScreen mainMenuScreen = this;
     
@@ -71,6 +85,8 @@ public class MainMenuScreen implements Screen {
     });
   }
   
+  
+  
   @Override
   public void show () {
     
@@ -81,7 +97,6 @@ public class MainMenuScreen implements Screen {
     Gdx.gl.glClearColor(0.15f, 0.15f, 0.3f, 1);
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     game.batch.begin();
-    
     
     int x = MyGame.WIDTH / 2 - EXIT_BUTTON_WIDTH / 2;
     if (game.cam.getInputInGameWorld().x < x + EXIT_BUTTON_WIDTH && game.cam.getInputInGameWorld().x > x && MyGame.HEIGHT - game.cam.getInputInGameWorld().y < EXIT_BUTTON_Y + EXIT_BUTTON_HEIGHT && MyGame.HEIGHT - game.cam.getInputInGameWorld().y > EXIT_BUTTON_Y)
@@ -105,9 +120,10 @@ public class MainMenuScreen implements Screen {
     }
     
     game.batch.draw(logo, MyGame.WIDTH / 2 - LOGO_WIDTH / 2, LOGO_Y, LOGO_WIDTH, LOGO_HEIGHT);
-    
+//    game.setScreen(new GameScreen());
     game.batch.end();
   }
+  
   
   @Override
   public void resize (int width, int height) {
