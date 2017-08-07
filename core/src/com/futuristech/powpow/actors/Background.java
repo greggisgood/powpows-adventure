@@ -1,6 +1,8 @@
 package com.futuristech.powpow.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Timer;
 import com.futuristech.powpow.utils.Assets;
 import com.futuristech.powpow.utils.Constants;
 
@@ -23,11 +26,20 @@ public class Background extends Actor {
     private BitmapFont gameOverFont = new BitmapFont();
     GlyphLayout glyphLayout = new GlyphLayout();
 
+    private Music musicBackground;
+
+
     public Background()
     {
         textureRegion = new TextureRegion(new Texture(Gdx.files.internal(Constants.BACKGROUND_IMAGE_PATH)));
         textureRegionBounds1 = new Rectangle(0 - Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
         textureRegionBounds2 = new Rectangle(Constants.APP_WIDTH / 2, 0, Constants.APP_WIDTH, Constants.APP_HEIGHT);
+
+        musicBackground = Gdx.audio.newMusic(Gdx.files.internal("music/backmusic.ogg"));
+        musicBackground.setLooping(true);
+        musicBackground.play();
+
+
     }
 
     @Override
@@ -48,6 +60,8 @@ public class Background extends Actor {
                 Constants.APP_HEIGHT);
         if (Assets.runnerHit)
         {
+
+            musicBackground.stop();
 //            gameOverFont.draw(batch, "Game Over: " + (score / 100), 0, 0);
             String text = "Game Over: " + (score / 100);
             glyphLayout.setText(gameOverFont, text);
@@ -55,7 +69,8 @@ public class Background extends Actor {
             float x = glyphLayout.width;
             gameOverFont.getData().setScale(3f);
             gameOverFont.draw(batch, "Game Over\n Final Score: " + (score / 100), x, 480 - 20);
-            
+
+
         }
         else
         {
