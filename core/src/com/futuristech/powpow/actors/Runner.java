@@ -1,6 +1,7 @@
 package com.futuristech.powpow.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -68,9 +69,11 @@ public class Runner extends GameActor {
 
     public void jump()
     {
+
         if (!(jumping || dodging)) {
             body.applyLinearImpulse(getUserData().getJumpingLinearImpulse(), body.getWorldCenter(), true);
             jumping = true;
+
         }
     }
 
@@ -104,6 +107,8 @@ public class Runner extends GameActor {
     public void hit() {
         body.applyAngularImpulse(getUserData().getHitAngularImpulse(), true);
         hit = true;
+        Sound gameover = Gdx.audio.newSound(Gdx.files.internal("music/gameover.wav"));
+        gameover.play();
     }
 
     public boolean isHit() {
