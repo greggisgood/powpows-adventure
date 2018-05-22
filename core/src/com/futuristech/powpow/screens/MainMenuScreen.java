@@ -134,9 +134,9 @@ public class MainMenuScreen extends Actor implements Screen {
     Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     game.batch.begin();
   
-    game.batch.draw(Background.textureRegion, Background.textureRegionBounds1.x, Background.textureRegionBounds1.y, Constants.APP_WIDTH,
+    game.batch.draw(textureRegion, textureRegionBounds1.x, textureRegionBounds1.y, Constants.APP_WIDTH,
         Constants.APP_HEIGHT);
-    game.batch.draw(Background.textureRegion, Background.textureRegionBounds2.x, Background.textureRegionBounds2.y, Constants.APP_WIDTH,
+    game.batch.draw(textureRegion, textureRegionBounds2.x, textureRegionBounds2.y, Constants.APP_WIDTH,
         Constants.APP_HEIGHT);
   
     game.batch.draw(textureRegion, 0, 0);
